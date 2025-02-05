@@ -1,4 +1,4 @@
-import {Metadata} from '@/components'
+import {Metadata, Header} from '@/components'
 import "./globals.css";
 
 
@@ -13,7 +13,10 @@ export default function RootLayout({
         <Metadata />
       </head>
       <body>
-        {children}
+        <Header />
+        <main>
+          {children}
+        </main>
       </body>
     </html>
   );

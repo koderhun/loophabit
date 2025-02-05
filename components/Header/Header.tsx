@@ -1,6 +1,8 @@
+'use client'
 import React, { useState } from "react";
+import { Navbar } from  "flowbite-react";
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   const toggleMenu = (): void => {
@@ -8,87 +10,27 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-gray-800 text-white">
-      <div className="container mx-auto flex justify-between items-center py-4 px-6">
-        {/* Логотип */}
-        <div className="text-2xl font-bold">
-          <a href="#">MyLogo</a>
-        </div>
-
-        {/* Навигация для десктопа */}
-        <nav className="hidden md:flex space-x-6">
-          <a href="#home" className="hover:text-gray-400">
-            Home
-          </a>
-          <a href="#about" className="hover:text-gray-400">
-            About
-          </a>
-          <a href="#services" className="hover:text-gray-400">
-            Services
-          </a>
-          <a href="#contact" className="hover:text-gray-400">
-            Contact
-          </a>
-        </nav>
-
-        {/* Кнопка меню для мобильных */}
-        <div className="md:hidden">
-          <button
-            className="text-gray-400 hover:text-white focus:outline-none"
-            onClick={toggleMenu}
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d={
-                  isMenuOpen
-                    ? "M6 18L18 6M6 6l12 12" // Иконка "крестик"
-                    : "M4 6h16M4 12h16m-7 6h7" // Иконка "три полоски"
-                }
-              ></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Мобильное меню */}
-      {isMenuOpen && (
-        <nav className="md:hidden bg-gray-700">
-          <ul className="flex flex-col space-y-2 py-4 px-6">
-            <li>
-              <a href="#home" className="hover:text-gray-400 block">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="#about" className="hover:text-gray-400 block">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="#services" className="hover:text-gray-400 block">
-                Services
-              </a>
-            </li>
-            <li>
-              <a href="#contact" className="hover:text-gray-400 block">
-                Contact
-              </a>
-            </li>
-          </ul>
-        </nav>
-      )}
-    </header>
+    <Navbar fluid rounded>
+      <Navbar.Brand href="https://flowbite.com/">
+        <img
+          src="https://flowbite.com/docs/images/logo.svg"
+          className="mr-3 h-6 sm:h-9"
+          alt="Flowbite Logo"
+        />
+        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+          Flowbite
+        </span>
+      </Navbar.Brand>
+      <Navbar.Toggle />
+      <Navbar.Collapse>
+        <Navbar.Link href="/navbars" active>
+          Home
+        </Navbar.Link>
+        <Navbar.Link href="/navbars">About</Navbar.Link>
+        <Navbar.Link href="/navbars">Services</Navbar.Link>
+        <Navbar.Link href="/navbars">Pricing</Navbar.Link>
+        <Navbar.Link href="/navbars">Contact</Navbar.Link>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };
-
-export default Header;
