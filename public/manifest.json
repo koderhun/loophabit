@@ -1,0 +1,40 @@
+{
+  "theme_color": "#05B16D",
+  "background_color": "#05B16D",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
+  "name": "LoopHabit",
+  "short_name": "LoopHabit",
+
+  "description": "Simple LoopHabit",
+  "dir": "ltr",
+  "lang": "en-US",
+  "categories": ["business", "minded"],
+
+  "features": ["Cross Platform", "fast"],
+
+  "icons": [
+    {
+      "src": "/images/pwa-64x64.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/maskable-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
