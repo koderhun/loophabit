@@ -1,36 +1,36 @@
 'use client'
-import React, { useState } from "react";
-import { Navbar } from  "flowbite-react";
+import React, {useState} from 'react'
+import Image from 'next/image'
+import {path} from '@/store'
+import {Navbar} from 'flowbite-react'
 
 export const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
 
   const toggleMenu = (): void => {
-    setIsMenuOpen((prev) => !prev);
-  };
+    setIsMenuOpen((prev) => !prev)
+  }
 
   return (
-    <Navbar fluid rounded>
-      <Navbar.Brand href="https://flowbite.com/">
-        <img
-          src="https://flowbite.com/docs/images/logo.svg"
+    <Navbar fluid rounded className="shadow-md sm:shadow-lg">
+      <Navbar.Brand href="/">
+        <Image
+          width={24}
+          height={24}
+          src={`${path.images}logo.svg`}
           className="mr-3 h-6 sm:h-9"
-          alt="Flowbite Logo"
+          alt="Logo"
         />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          Flowbite
+          LoopHabit
         </span>
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
-        <Navbar.Link href="/navbars" active>
+        <Navbar.Link href="/" active>
           Home
         </Navbar.Link>
-        <Navbar.Link href="/navbars">About</Navbar.Link>
-        <Navbar.Link href="/navbars">Services</Navbar.Link>
-        <Navbar.Link href="/navbars">Pricing</Navbar.Link>
-        <Navbar.Link href="/navbars">Contact</Navbar.Link>
       </Navbar.Collapse>
     </Navbar>
-  );
-};
+  )
+}
