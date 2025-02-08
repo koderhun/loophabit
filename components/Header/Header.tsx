@@ -5,12 +5,6 @@ import {path} from '@/store'
 import {Navbar} from 'flowbite-react'
 
 export const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
-
-  const toggleMenu = (): void => {
-    setIsMenuOpen((prev) => !prev)
-  }
-
   return (
     <Navbar fluid rounded className="shadow-md sm:shadow-lg">
       <Navbar.Brand href="/">

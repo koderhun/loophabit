@@ -1,12 +1,11 @@
-
 interface HabitType {
-  name: string;
-  count: number;
+  name: string
+  count: number
   type: 'boolean' | 'count' // boolean or count
 }
 
 interface LoopDataType {
-  date: string;
+  date: string
   habits: HabitType[]
 }
 
@@ -24,9 +23,9 @@ const data: FullDataType = {
           count: 3,
           type: 'boolean', // count
         },
-        { name: 'Cooking', count: 2, type:  'boolean'},
-        { name: 'Gardening', count: 1, type: 'boolean'}
+        {name: 'Cooking', count: 2, type: 'boolean'},
+        {name: 'Gardening', count: 1, type: 'boolean'},
       ],
     },
-  ]
+  ],
 }
