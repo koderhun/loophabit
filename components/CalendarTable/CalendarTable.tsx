@@ -1,4 +1,5 @@
 import React from 'react'
+import {HabitList} from '@/components'
 import {generateDay, getDayColor} from '@/utils'
 
 export const CalendarTable: React.FC = () => {
@@ -26,7 +27,9 @@ export const CalendarTable: React.FC = () => {
               ))}
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+            <HabitList dates={dates} />
+          </tbody>
         </table>
       </div>
       <div className="py-4">
