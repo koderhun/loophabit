@@ -1,5 +1,5 @@
 import React from 'react'
-import {HabitList} from '@/components'
+import {HabitList, ModalAppendForm} from '@/components'
 import {generateDay} from '@/utils'
 
 const getDayColor = (isToday: boolean) => {
@@ -38,11 +38,7 @@ export const CalendarTable: React.FC = () => {
         </table>
       </div>
       <div className="py-4">
-        <button
-          type="button"
-          className="inline-flex items-center rounded-lg bg-blue-500 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-          Add Habit
-        </button>
+        <ModalAppendForm />
       </div>
     </>
   )
