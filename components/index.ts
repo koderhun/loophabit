@@ -1,2 +1,5 @@
 export {Metadata} from './Metadata/Metadata'
 export {Header} from './Header/Header'
+export {Calendar} from './Calendar/Calendar'
+export {Week} from './Week/Week'
+export {CalendarTable} from './CalendarTable/CalendarTable'
