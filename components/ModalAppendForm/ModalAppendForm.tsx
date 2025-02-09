@@ -1,23 +1,53 @@
 'use client'
 
-import {Button, Modal} from 'flowbite-react'
 import {useState} from 'react'
+import {Button, Modal, Label, TextInput} from 'flowbite-react'
+import {useForm} from 'react-hook-form'
+import {useStore} from '@/store'
 
+interface FormValues {
+  habit: string
+}
 export const ModalAppendForm = () => {
+  const appendHabit = useStore((state) => state.appendHabit)
   const [openModal, setOpenModal] = useState(true)
+  const {register, handleSubmit, reset} = useForm<FormValues>()
+
+  const onSubmit = (data: FormValues) => {
+    console.log(data)
+    appendHabit({
+      habit: data.habit,
+      days: [], // Пустой массив дней
+    })
+
+    reset()
+    setOpenModal(false)
+  }
 
   return (
     <>
       <Button onClick={() => setOpenModal(true)}>Add habit</Button>
       <Modal show={openModal} onClose={() => setOpenModal(false)}>
         <Modal.Header>Append Habit</Modal.Header>
-        <Modal.Body></Modal.Body>
-        <Modal.Footer>
-          <Button onClick={() => setOpenModal(false)}>Append</Button>
-          <Button color="gray" onClick={() => setOpenModal(false)}>
-            Close
-          </Button>
-        </Modal.Footer>
+        <Modal.Body>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-6">
+            <div>
+              <div className="mb-2 block">
+                <Label htmlFor="habit" value="Your Habit" />
+              </div>
+              <TextInput
+                {...register('habit', {required: true})}
+                type="text"
+                placeholder="Sport"
+              />
+            </div>
+            <Button className="" type="submit">
+              Submit
+            </Button>
+          </form>
+        </Modal.Body>
       </Modal>
     </>
   )
