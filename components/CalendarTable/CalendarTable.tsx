@@ -1,11 +1,5 @@
 import React from 'react'
-import {generateDay} from '@/utils'
-
-const getDayColor = (day: string, isToday: boolean) => {
-  if (isToday) {
-    return 'bg-green-200 text-green-800 dark:bg-green-500 dark:text-white font-bold'
-  }
-}
+import {generateDay, getDayColor} from '@/utils'
 
 export const CalendarTable: React.FC = () => {
   const dates = generateDay()
@@ -32,20 +26,7 @@ export const CalendarTable: React.FC = () => {
               ))}
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td className="sticky left-0 border border-gray-300 bg-gray-100 px-4 py-2 dark:border-gray-600 dark:bg-gray-700">
-                John Doe
-              </td>
-              {dates.map((date, index) => (
-                <td
-                  key={index}
-                  className={`border border-gray-300 px-4 py-2 dark:border-gray-600 ${getDayColor(date.day, date.isToday)}`}>
-                  Present
-                </td>
-              ))}
-            </tr>
-          </tbody>
+          <tbody></tbody>
         </table>
       </div>
       <div className="py-4">

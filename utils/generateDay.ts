@@ -1,11 +1,11 @@
-interface Day {
+export interface DayType {
   date: string // Дата в формате ISO (YYYY-MM-DD)
   day: string // Название дня недели
   isToday: boolean // Флаг, указывающий, является ли день текущим
 }
 
-export const generateDay = (): Day[] => {
-  const dates: Day[] = []
+export const generateDay = (): DayType[] => {
+  const dates: DayType[] = []
   const today = new Date()
 
   for (let i = 9; i >= 0; i--) {
