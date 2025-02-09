@@ -1,10 +1,15 @@
 import React from 'react'
 import {HabitList} from '@/components'
-import {generateDay, getDayColor} from '@/utils'
+import {generateDay} from '@/utils'
+
+const getDayColor = (isToday: boolean) => {
+  if (isToday) {
+    return 'bg-green-200 text-green-800 dark:bg-green-500 dark:text-white font-bold'
+  }
+}
 
 export const CalendarTable: React.FC = () => {
   const dates = generateDay()
-  console.log(dates)
 
   return (
     <>
@@ -18,7 +23,7 @@ export const CalendarTable: React.FC = () => {
               {dates.map((date, index) => (
                 <th
                   key={index}
-                  className={`border border-gray-300 px-4 py-2 dark:border-gray-600 ${getDayColor(date.day, date.isToday)}`}>
+                  className={`border border-gray-300 px-4 py-2 dark:border-gray-600 ${getDayColor(date.isToday)}`}>
                   <div>{date.day}</div>
                   <div className="whitespace-nowrap text-sm text-gray-400">
                     {date.date}

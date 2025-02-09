@@ -1,4 +1,6 @@
-import {DayType, getDayColor} from '@/utils'
+'use client'
+import {DayType} from '@/utils'
+import {useStore} from '@/store'
 
 type Props = {
   dates: DayType[]
@@ -9,51 +11,30 @@ interface Day {
   isComplite: boolean | string
 }
 
-interface Habit {
-  habit: string
-  days: Day[] // Массив дней, связанных с привычкой
-}
-
-const list: Habit[] = [
-  {
-    habit: 'Read a book',
-    days: [
-      {
-        day: '2025-02-01',
-        isComplite: true,
-      },
-    ],
-  },
-  {
-    habit: 'Sport',
-    days: [
-      {
-        day: '2025-02-02',
-        isComplite: true,
-      },
-      {
-        day: '2025-02-09',
-        isComplite: true,
-      },
-    ],
-  },
-]
-
 const areDateEqual = (date1: string, date2: string): boolean => {
   return date1 === date2
 }
 
+const getDayColor = (isToday: boolean) => {
+  if (isToday) {
+    return 'bg-green-200 text-green-800 dark:bg-green-500 dark:text-white font-bold'
+  }
+}
+
 export const HabitList = ({dates}: Props) => {
-  return list.map((habit) => {
+  const list = useStore((state) => state.habitList)
+  console.log(list)
+
+  return list.map((habit, key1) => {
     return (
-      <tr>
+      <tr key={key1}>
         <td className="sticky left-0 border border-gray-300 bg-gray-100 px-4 py-2 dark:border-gray-600 dark:bg-gray-700">
           {habit.habit}
         </td>
         {dates.map((date, index) => (
           <td
             key={index}
-            className={`border border-gray-300 px-4 py-2 text-center dark:border-gray-600 ${getDayColor(date.day, date.isToday)}`}>
+            className={`border border-gray-300 px-4 py-2 text-center dark:border-gray-600 ${getDayColor(date.isToday)}`}>
             {habit.days.some((day) => areDateEqual(day.day, date.date)) && (
               <svg
                 className="inline-block h-[30px] w-[30px] text-gray-800 dark:text-white"
