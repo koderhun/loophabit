@@ -1,11 +1,11 @@
 'use client'
-
+import {createPortal} from 'react-dom'
 import {useStore} from '@/store'
 
 export const ModalConfirm = () => {
   const {modal, closeModal} = useStore()
 
-  return (
+  return createPortal(
     <>
       {modal.isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -27,6 +27,7 @@ export const ModalConfirm = () => {
           </div>
         </div>
       )}
-    </>
+    </>,
+    document.body || null,
   )
 }

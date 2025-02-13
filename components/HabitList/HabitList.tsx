@@ -40,7 +40,7 @@ export const HabitList = ({dates, list}: Props) => {
 
   return (
     <>
-      {createPortal(<ModalConfirm />, document.body)}
+      <ModalConfirm />
       {list.map((habit, key1) => {
         return (
           <tr key={key1}>

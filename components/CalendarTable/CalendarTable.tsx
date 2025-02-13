@@ -21,7 +21,7 @@ export const CalendarTable: React.FC = () => {
 
   return (
     <>
-      {!list.length ? (
+      {list.length ? (
         <div className="overflow-x-auto">
           <table className="w-full table-auto border-collapse border border-gray-300 dark:border-gray-600">
             <thead>
