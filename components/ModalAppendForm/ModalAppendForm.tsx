@@ -10,14 +10,13 @@ interface FormValues {
 }
 export const ModalAppendForm = () => {
   const appendHabit = useStore((state) => state.appendHabit)
-  const [openModal, setOpenModal] = useState(true)
+  const [openModal, setOpenModal] = useState(false)
   const {register, handleSubmit, reset} = useForm<FormValues>()
 
   const onSubmit = (data: FormValues) => {
-    console.log(data)
     appendHabit({
       habit: data.habit,
-      days: [], // Пустой массив дней
+      days: [],
     })
 
     reset()
