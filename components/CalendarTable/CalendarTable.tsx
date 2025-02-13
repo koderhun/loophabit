@@ -19,36 +19,36 @@ export const CalendarTable: React.FC = () => {
     loadHabits()
   }, [loadHabits])
 
-  if (!list.length) {
-    return <div>No habit...</div>
-  }
-
   return (
     <>
-      <div className="overflow-x-auto">
-        <table className="w-full table-auto border-collapse border border-gray-300 dark:border-gray-600">
-          <thead>
-            <tr>
-              <th className="sticky left-0 border border-gray-300 bg-gray-300 px-4 py-2 dark:border-gray-600 dark:bg-gray-700">
-                Habit
-              </th>
-              {dates.map((date, index) => (
-                <th
-                  key={index}
-                  className={`border border-gray-300 px-4 py-2 dark:border-gray-600 ${getDayColor(date.isToday)}`}>
-                  <div>{date.day}</div>
-                  <div className="whitespace-nowrap text-sm text-gray-400">
-                    {date.date}
-                  </div>
+      {!list.length ? (
+        <div className="overflow-x-auto">
+          <table className="w-full table-auto border-collapse border border-gray-300 dark:border-gray-600">
+            <thead>
+              <tr>
+                <th className="sticky left-0 border border-gray-300 bg-gray-300 px-4 py-2 dark:border-gray-600 dark:bg-gray-700">
+                  Habit
                 </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            <HabitList dates={dates} list={list} />
-          </tbody>
-        </table>
-      </div>
+                {dates.map((date, index) => (
+                  <th
+                    key={index}
+                    className={`border border-gray-300 px-4 py-2 dark:border-gray-600 ${getDayColor(date.isToday)}`}>
+                    <div>{date.day}</div>
+                    <div className="whitespace-nowrap text-sm text-gray-400">
+                      {date.date}
+                    </div>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <HabitList dates={dates} list={list} />
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        'No habit...'
+      )}
       <div className="py-4">
         <ModalAppendForm />
       </div>
