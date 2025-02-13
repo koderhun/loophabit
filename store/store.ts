@@ -1,4 +1,5 @@
 'use client'
+
 import {create} from 'zustand'
 
 export interface Day {
@@ -11,12 +12,30 @@ export interface HabitType {
   days: Day[] // Массив дней, связанных с привычкой
 }
 
+type ModalState = {
+  isOpen: boolean
+  title: string
+  message: string
+  onConfirm: (() => void) | null
+  onCancel: (() => void) | null
+}
+
 type Store = {
   habitList: HabitType[]
   appendHabit: (habit: HabitType) => void
   toggleDayToHabit: (habitName: string, targetDay: string) => void
   deleteHabit: (habitName: string) => void
   loadHabits: () => void // Метод для загрузки данных из localStorage
+
+  // Модальное окно
+  modal: ModalState
+  openModal: (
+    title: string,
+    message: string,
+    onConfirm: () => void,
+    onCancel?: () => void,
+  ) => void
+  closeModal: () => void
 }
 
 // Проверка доступности localStorage
@@ -107,5 +126,36 @@ export const useStore = create<Store>()((set) => ({
       const loadedHabits = loadFromLocalStorage()
       return {habitList: loadedHabits}
     })
+  },
+
+  // Модальное окно
+  modal: {
+    isOpen: false,
+    title: '',
+    message: '',
+    onConfirm: null,
+    onCancel: null,
+  },
+  openModal: (title, message, onConfirm, onCancel) => {
+    set(() => ({
+      modal: {
+        isOpen: true,
+        title,
+        message,
+        onConfirm,
+        onCancel: onCancel || null,
+      },
+    }))
+  },
+  closeModal: () => {
+    set(() => ({
+      modal: {
+        isOpen: false,
+        title: '',
+        message: '',
+        onConfirm: null,
+        onCancel: null,
+      },
+    }))
   },
 }))
