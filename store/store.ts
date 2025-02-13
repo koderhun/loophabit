@@ -1,3 +1,4 @@
+'use client'
 import {create} from 'zustand'
 
 export interface Day {
@@ -5,71 +6,106 @@ export interface Day {
   isComplite: boolean | string
 }
 
-export interface Habit {
+export interface HabitType {
   habit: string
   days: Day[] // Массив дней, связанных с привычкой
 }
 
 type Store = {
-  habitList: Habit[]
-  appendHabit: (habit: Habit) => void
+  habitList: HabitType[]
+  appendHabit: (habit: HabitType) => void
   toggleDayToHabit: (habitName: string, targetDay: string) => void
+  deleteHabit: (habitName: string) => void
+  loadHabits: () => void // Метод для загрузки данных из localStorage
 }
 
+// Проверка доступности localStorage
+const isLocalStorageAvailable = (() => {
+  try {
+    const testKey = '__test__'
+    localStorage.setItem(testKey, 'test')
+    localStorage.removeItem(testKey)
+    return true
+  } catch {
+    console.error('localStorage is not available.')
+    return false
+  }
+})()
+
+// Функция для загрузки данных из localStorage
+const loadFromLocalStorage = (): HabitType[] => {
+  if (!isLocalStorageAvailable) return []
+  try {
+    const data = localStorage.getItem('habitList')
+    return data ? JSON.parse(data) : []
+  } catch (error) {
+    console.error('Error loading from localStorage:', error)
+    return []
+  }
+}
+
+// Функция для сохранения данных в localStorage
+const saveToLocalStorage = (() => {
+  if (!isLocalStorageAvailable) return () => {}
+  return (habitList: HabitType[]) => {
+    try {
+      localStorage.setItem('habitList', JSON.stringify(habitList))
+    } catch (error) {
+      if (
+        error instanceof DOMException &&
+        error.name === 'QuotaExceededError'
+      ) {
+        console.error('localStorage quota exceeded. Cannot save data.')
+      } else {
+        console.error('Error saving to localStorage:', error)
+      }
+    }
+  }
+})()
+
 export const useStore = create<Store>()((set) => ({
-  habitList: [
-    {
-      habit: 'Read a book',
-      days: [
-        {
-          day: '2025-02-01',
-          isComplite: true,
-        },
-      ],
-    },
-    {
-      habit: 'Sport',
-      days: [
-        {
-          day: '2025-02-02',
-          isComplite: true,
-        },
-        {
-          day: '2025-02-09',
-          isComplite: true,
-        },
-      ],
-    },
-  ],
-  appendHabit: (habit: Habit) => {
-    set((state) => ({
-      habitList: [...state.habitList, habit],
-    }))
+  habitList: [], // Изначально пустой массив, данные загружаются на клиенте
+  appendHabit: (habit: HabitType) => {
+    set((state) => {
+      const updatedHabitList = [...state.habitList, habit]
+      saveToLocalStorage(updatedHabitList) // Сохраняем обновленный список в localStorage
+      return {habitList: updatedHabitList}
+    })
   },
   toggleDayToHabit: (habitName: string, targetDay: string) => {
-    set((state) => ({
-      habitList: state.habitList.map((habit) => {
+    set((state) => {
+      const updatedHabitList = state.habitList.map((habit) => {
         if (habit.habit === habitName) {
-          // Проверяем, существует ли день
           const dayIndex = habit.days.findIndex((day) => day.day === targetDay)
 
           if (dayIndex !== -1) {
-            // Если день найден, переключаем его состояние
-            const updatedDays = habit.days.map((day, index) =>
-              index === dayIndex ? {...day, isComplite: !day.isComplite} : day,
-            )
-            return {...habit, days: updatedDays}
+            // Переключаем состояние дня
+            habit.days[dayIndex].isComplite = !habit.days[dayIndex].isComplite
           } else {
-            // Если день не найден, добавляем его с состоянием isComplite: true
-            return {
-              ...habit,
-              days: [...habit.days, {day: targetDay, isComplite: true}],
-            }
+            // Добавляем новый день
+            habit.days.push({day: targetDay, isComplite: true})
           }
         }
-        // Если это не целевая привычка, возвращаем ее без изменений
         return habit
-      }),
-    }))
+      })
+
+      saveToLocalStorage(updatedHabitList) // Сохраняем обновленный список в localStorage
+      return {habitList: updatedHabitList}
+    })
+  },
+  deleteHabit: (habitName: string) => {
+    set((state) => {
+      const updatedHabitList = state.habitList.filter(
+        (habit) => habit.habit !== habitName,
+      )
+      saveToLocalStorage(updatedHabitList) // Сохраняем обновленный список в localStorage
+      return {habitList: updatedHabitList}
+    })
+  },
+  loadHabits: () => {
+    set(() => {
+      const loadedHabits = loadFromLocalStorage()
+      return {habitList: loadedHabits}
+    })
   },
 }))

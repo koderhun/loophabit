@@ -19,12 +19,12 @@ export const Header: React.FC = () => {
           LoopHabit
         </span>
       </Navbar.Brand>
-      <Navbar.Toggle />
+      {/* <Navbar.Toggle />
       <Navbar.Collapse>
         <Navbar.Link href="/" active>
           Home
         </Navbar.Link>
-      </Navbar.Collapse>
+      </Navbar.Collapse> */}
     </Navbar>
   )
 }

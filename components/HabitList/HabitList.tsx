@@ -1,10 +1,11 @@
 'use client'
-import {memo} from 'react'
+import {memo, useEffect} from 'react'
 import {DayType} from '@/utils'
-import {useStore} from '@/store'
+import {useStore, HabitType} from '@/store'
 
 type Props = {
   dates: DayType[]
+  list: HabitType[]
 }
 
 const getDayColor = (isToday: boolean) => {
@@ -32,22 +33,22 @@ const Check = memo(() => (
   </svg>
 ))
 
-export const HabitList = ({dates}: Props) => {
-  const list = useStore((state) => state.habitList)
+export const HabitList = ({dates, list}: Props) => {
   const toggleDayToHabit = useStore((state) => state.toggleDayToHabit)
+  const loadHabits = useStore((state) => state.loadHabits)
 
   const handleClick = (habit: string, date: string) => () => {
     console.log('okkk', habit, date)
     toggleDayToHabit(habit, date)
   }
 
-  console.log('list', list)
-
   return list.map((habit, key1) => {
     return (
       <tr key={key1}>
         <td className="sticky left-0 border border-gray-300 bg-gray-100 px-4 py-2 dark:border-gray-600 dark:bg-gray-700">
-          {habit.habit}
+          <div className="line-clamp-3" title={habit.habit}>
+            {habit.habit}
+          </div>
         </td>
         {dates.map((date, index) => (
           <td

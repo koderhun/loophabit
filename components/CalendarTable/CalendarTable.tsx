@@ -1,6 +1,8 @@
-import React from 'react'
+'use client'
+import React, {useEffect} from 'react'
 import {HabitList, ModalAppendForm} from '@/components'
 import {generateDay} from '@/utils'
+import {useStore, HabitType} from '@/store'
 
 const getDayColor = (isToday: boolean) => {
   if (isToday) {
@@ -9,7 +11,17 @@ const getDayColor = (isToday: boolean) => {
 }
 
 export const CalendarTable: React.FC = () => {
+  const list: HabitType[] = useStore((state) => state.habitList)
+  const loadHabits = useStore((state) => state.loadHabits)
   const dates = generateDay()
+
+  useEffect(() => {
+    loadHabits()
+  }, [loadHabits])
+
+  if (!list.length) {
+    return <div>No habit...</div>
+  }
 
   return (
     <>
@@ -18,7 +30,7 @@ export const CalendarTable: React.FC = () => {
           <thead>
             <tr>
               <th className="sticky left-0 border border-gray-300 bg-gray-300 px-4 py-2 dark:border-gray-600 dark:bg-gray-700">
-                Day
+                Habit
               </th>
               {dates.map((date, index) => (
                 <th
@@ -33,7 +45,7 @@ export const CalendarTable: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            <HabitList dates={dates} />
+            <HabitList dates={dates} list={list} />
           </tbody>
         </table>
       </div>
