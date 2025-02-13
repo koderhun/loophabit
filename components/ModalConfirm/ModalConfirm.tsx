@@ -28,6 +28,6 @@ export const ModalConfirm = () => {
         </div>
       )}
     </>,
-    document.body || null,
+    document?.body || null,
   )
 }
