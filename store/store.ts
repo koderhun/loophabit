@@ -26,6 +26,7 @@ type Store = {
   appendHabit: (habit: HabitType) => void
   toggleDayToHabit: (habitName: string, targetDay: string) => void
   deleteHabit: (habitName: string) => void
+  editHabit: (oldHabitName: string, newHabitName: string) => void // Новая функция
   loadHabits: () => void
 
   // Модальное окно
@@ -77,6 +78,18 @@ export const useStore = create<Store>()(
           const updatedHabitList = state.habitList.filter(
             (habit) => habit.habit !== habitName,
           )
+          return {habitList: updatedHabitList}
+        })
+      },
+      editHabit: (oldHabitName: string, newHabitName: string) => {
+        set((state) => {
+          const updatedHabitList = state.habitList.map((habit) => {
+            if (habit.habit === oldHabitName) {
+              return {...habit, habit: newHabitName}
+            }
+            return habit
+          })
+
           return {habitList: updatedHabitList}
         })
       },
