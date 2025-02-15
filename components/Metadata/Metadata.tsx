@@ -29,16 +29,34 @@ export const Metadata = () => {
         href={`${metadata.picturePath}favicon.svg`}
         type="image/svg"
       />
-      <link rel="shortcut icon" href={`${metadata.picturePath}favicon.ico`} />
+      <link
+        rel="shortcut icon"
+        href={`${metadata.picturePath}favicon.ico`}
+      />
 
       {/* android */}
-      <link rel="manifest" href={metadata.manifest} />
+      <link
+        rel="manifest"
+        href={metadata.manifest}
+      />
 
       {/* apple */}
-      <meta name="application-name" content={metadata.title} />
-      <meta name="mobile-web-app-title" content={metadata.title} />
-      <meta name="mobile-web-app-capable" content="yes" />
-      <meta name="mobile-web-app-status-bar-style" content="black" />
+      <meta
+        name="application-name"
+        content={metadata.title}
+      />
+      <meta
+        name="mobile-web-app-title"
+        content={metadata.title}
+      />
+      <meta
+        name="mobile-web-app-capable"
+        content="yes"
+      />
+      <meta
+        name="mobile-web-app-status-bar-style"
+        content="black"
+      />
 
       <link
         rel="apple-touch-icon"
@@ -52,10 +70,21 @@ export const Metadata = () => {
       />
 
       {/* SEO  */}
-      <meta name="description" content={metadata.description} />
-      <meta name="keywords" content={metadata.keywords.join(', ')} />
+      <meta
+        name="description"
+        content={metadata.description}
+      />
+      <meta
+        name="keywords"
+        content={metadata.keywords.join(', ')}
+      />
       {metadata.themeColor.map(({media, color}, index) => (
-        <meta key={index} name="theme-color" media={media} content={color} />
+        <meta
+          key={index}
+          name="theme-color"
+          media={media}
+          content={color}
+        />
       ))}
       {metadata.authors.map(({name, url}, index) => (
         <meta

@@ -69,6 +69,12 @@ importers:
       prettier:
         specifier: ^3.4.2
         version: 3.4.2
+      prettier-plugin-classnames:
+        specifier: ^0.7.6
+        version: 0.7.6(prettier@3.4.2)
+      prettier-plugin-merge:
+        specifier: ^0.7.2
+        version: 0.7.2(prettier@3.4.2)
       prettier-plugin-tailwindcss:
         specifier: ^0.6.11
         version: 0.6.11(prettier@3.4.2)
@@ -1604,6 +1610,10 @@ packages:
   didyoumean@1.2.2:
     resolution: {integrity: sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw==}
 
+  diff@5.1.0:
+    resolution: {integrity: sha512-D+mk+qE8VC/PAUrlAU34N+VfXev0ghe5ywmpqrawphmVZc1bEfn56uo9qpyGp1p4xpzOHkSW4ztBd6L7Xx4ACw==}
+    engines: {node: '>=0.3.1'}
+
   dir-glob@3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
     engines: {node: '>=8'}
@@ -2544,6 +2554,25 @@ packages:
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
     engines: {node: '>= 0.8.0'}
+
+  prettier-plugin-classnames@0.7.6:
+    resolution: {integrity: sha512-sBBnS0VK/gXwtSbsgK5bB5kdtGRWn+hZVBoV/GqLKK6vJGlECmDck/ilqEUCmk7KTGZpRsxIFMW6DXn6OJHAng==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      prettier: ^2 || ^3
+      prettier-plugin-astro: '*'
+      prettier-plugin-svelte: '*'
+    peerDependenciesMeta:
+      prettier-plugin-astro:
+        optional: true
+      prettier-plugin-svelte:
+        optional: true
+
+  prettier-plugin-merge@0.7.2:
+    resolution: {integrity: sha512-o/twjBSVjKttfBBz7KWdJxyPjEAoSh1WwkEv02XKWoyifPXVPSifgB597nntEzTo5hN63XnoZQkAdDVnt6WRLA==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      prettier: ^2 || ^3
 
   prettier-plugin-tailwindcss@0.6.11:
     resolution: {integrity: sha512-YxaYSIvZPAqhrrEpRtonnrXdghZg1irNg4qrjboCXrpybLWVs55cW2N3juhspVJiO0JBvYJT8SYsJpc8OQSnsA==}
@@ -4966,6 +4995,8 @@ snapshots:
 
   didyoumean@1.2.2: {}
 
+  diff@5.1.0: {}
+
   dir-glob@3.0.1:
     dependencies:
       path-type: 4.0.0
@@ -5957,6 +5988,15 @@ snapshots:
       tunnel-agent: 0.6.0
 
   prelude-ls@1.2.1: {}
+
+  prettier-plugin-classnames@0.7.6(prettier@3.4.2):
+    dependencies:
+      prettier: 3.4.2
+
+  prettier-plugin-merge@0.7.2(prettier@3.4.2):
+    dependencies:
+      diff: 5.1.0
+      prettier: 3.4.2
 
   prettier-plugin-tailwindcss@0.6.11(prettier@3.4.2):
     dependencies:

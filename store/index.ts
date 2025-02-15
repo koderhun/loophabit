@@ -1,3 +1,5 @@
-export {useStore} from './store'
 export {path} from './data'
-export type {HabitType, Day} from './store'
+export type {HabitType, Day} from './logicStore'
+export {useLogicStore} from './logicStore'
+export type {ModalState} from './viewStore'
+export {useViewStore} from './viewStore'

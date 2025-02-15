@@ -36,7 +36,9 @@ export const Calendar: React.FC = () => {
     // Добавляем пустые ячейки перед первым днем месяца
     for (let i = 0; i < firstDay; i++) {
       days.push(
-        <div key={`empty-${i}`} className="text-transparent">
+        <div
+          key={`empty-${i}`}
+          className="text-transparent">
           0
         </div>,
       )
@@ -53,8 +55,7 @@ export const Calendar: React.FC = () => {
         <div
           key={day}
           className={`rounded p-2 text-center ${
-            isToday ? 'bg-blue-500 font-bold text-white' : 'bg-gray-100'
-          }`}>
+            isToday ? 'bg-blue-500 font-bold text-white' : 'bg-gray-100' }`}>
           {day}
         </div>,
       )

@@ -6,7 +6,10 @@ import {Navbar} from 'flowbite-react'
 
 export const Header: React.FC = () => {
   return (
-    <Navbar fluid rounded className="shadow-md sm:shadow-lg">
+    <Navbar
+      fluid
+      rounded
+      className="shadow-md sm:shadow-lg">
       <Navbar.Brand href="/">
         <Image
           width={24}

@@ -3,13 +3,13 @@
 import {useState} from 'react'
 import {Button, Modal, Label, TextInput} from 'flowbite-react'
 import {useForm} from 'react-hook-form'
-import {useStore} from '@/store'
+import {useLogicStore} from '@/store'
 
 interface FormValues {
   habit: string
 }
 export const ModalAppendForm = () => {
-  const appendHabit = useStore((state) => state.appendHabit)
+  const appendHabit = useLogicStore(state => state.appendHabit)
   const [openModal, setOpenModal] = useState(false)
   const {register, handleSubmit, reset} = useForm<FormValues>()
 
@@ -26,7 +26,9 @@ export const ModalAppendForm = () => {
   return (
     <>
       <Button onClick={() => setOpenModal(true)}>Add habit</Button>
-      <Modal show={openModal} onClose={() => setOpenModal(false)}>
+      <Modal
+        show={openModal}
+        onClose={() => setOpenModal(false)}>
         <Modal.Header>Append Habit</Modal.Header>
         <Modal.Body>
           <form
@@ -34,7 +36,10 @@ export const ModalAppendForm = () => {
             className="flex flex-col gap-6">
             <div>
               <div className="mb-2 block">
-                <Label htmlFor="habit" value="Your Habit" />
+                <Label
+                  htmlFor="habit"
+                  value="Your Habit"
+                />
               </div>
               <TextInput
                 {...register('habit', {required: true})}
@@ -42,7 +47,9 @@ export const ModalAppendForm = () => {
                 placeholder="Sport"
               />
             </div>
-            <Button className="" type="submit">
+            <Button
+              className=""
+              type="submit">
               Submit
             </Button>
           </form>

@@ -1,11 +1,16 @@
 {
-  "printWidth": 100,
+  "printWidth": 80,
   "singleQuote": true,
   "trailingComma": "all",
   "bracketSpacing": false,
-  "jsxBracketSameLine": true,
+  "bracketSameLine": true,
   "tabWidth": 2,
   "semi": false,
-  "plugins": ["prettier-plugin-tailwindcss"],
-  "singleAttributePerLine": true
+  "plugins": [
+    "prettier-plugin-tailwindcss",
+    "prettier-plugin-classnames",
+    "prettier-plugin-merge"
+  ],
+  "singleAttributePerLine": true,
+  "arrowParens": "avoid"
 }

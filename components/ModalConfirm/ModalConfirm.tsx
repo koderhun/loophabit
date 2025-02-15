@@ -1,9 +1,9 @@
 'use client'
 import {createPortal} from 'react-dom'
-import {useStore} from '@/store'
+import {useViewStore} from '@/store'
 
 export const ModalConfirm = () => {
-  const {modal, closeModal} = useStore()
+  const {modal, closeModal} = useViewStore()
 
   return createPortal(
     <>
