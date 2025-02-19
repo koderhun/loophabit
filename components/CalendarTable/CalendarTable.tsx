@@ -1,8 +1,9 @@
 'use client'
 import React, {useEffect} from 'react'
-import {HabitList, ModalAppendForm} from '@/components'
+import {FaCheck} from 'react-icons/fa'
 import {generateDay} from '@/utils'
 import {useLogicStore} from '@/store'
+import {AppendForm, ModalHOC} from '@/components'
 
 const getDayColor = (isToday: boolean) => {
   if (isToday) {
@@ -13,6 +14,14 @@ const getDayColor = (isToday: boolean) => {
 export const CalendarTable: React.FC = () => {
   const {loadHabits, habitList} = useLogicStore()
   const dates = generateDay()
+
+  const {toggleDayToHabit} = useLogicStore()
+
+  const {Modal: AppendModal, isOpen, setIsOpen} = ModalHOC(AppendForm)
+
+  const handleCheckHabit = (habit: string, date: string) => () => {
+    toggleDayToHabit(habit, date)
+  }
 
   useEffect(() => {
     loadHabits()
@@ -44,19 +53,47 @@ export const CalendarTable: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              <HabitList
-                dates={dates}
-                list={habitList}
-              />
+              {habitList.map((habit, key1) => (
+                <tr key={key1}>
+                  <td
+                    className="sticky left-0 w-1/3 border border-gray-300 bg-gray-100 px-4 py-2
+                      dark:border-gray-600 dark:bg-gray-700">
+                    <div className="flex gap-4 align-middle">
+                      <div
+                        className="line-clamp-3"
+                        title={habit.habit}>
+                        {habit.habit}
+                      </div>
+                    </div>
+                  </td>
+                  {dates.map((date, index) => (
+                    <td
+                      key={`${String(index)}_${String(date.date)}`}
+                      onClick={handleCheckHabit(habit.habit, date.date)}
+                      className={`cursor-pointer border border-gray-300 px-4 py-2 text-center dark:border-gray-600
+                        ${getDayColor(date.isToday)}`}>
+                      {habit.days.some(
+                        day => day.day === date.date && day.isComplite,
+                      ) && <FaCheck className="inline-block text-green-500" />}
+                    </td>
+                  ))}
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
       ) : (
         'No habit...'
       )}
-      <div className="py-4">
-        <ModalAppendForm />
+      <div>
+        <button
+          onClick={() => setIsOpen(true)}
+          className="mt-4 block w-full rounded-lg bg-blue-500 px-4 py-2 font-bold text-white
+            hover:bg-blue-700">
+          Append
+        </button>
       </div>
+      <AppendModal title={'ok'} />
     </>
   )
 }
