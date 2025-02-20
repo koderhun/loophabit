@@ -45,7 +45,7 @@ export const CalendarTable: React.FC = () => {
                     className={`border border-gray-300 px-4 py-2 dark:border-gray-600
                       ${getDayColor(date.isToday)}`}>
                     <div>{date.day}</div>
-                    <div className="whitespace-nowrap text-sm text-gray-400">
+                    <div className="text-sm whitespace-nowrap text-gray-400">
                       {date.date}
                     </div>
                   </th>

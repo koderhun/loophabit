@@ -42,7 +42,7 @@ export const ModalHOC = (
           {/* Full-screen container to center the panel */}
           <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
             {/* The actual dialog panel  */}
-            <DialogPanel className="min-w-xs max-w-lg space-y-4 bg-white p-4">
+            <DialogPanel className="max-w-lg min-w-xs space-y-4 bg-white p-4">
               <DialogTitle className="font-bold">{title}</DialogTitle>
               <Component closeModal={closeModal} />
             </DialogPanel>
