@@ -17,7 +17,7 @@ export const CalendarTable: React.FC = () => {
 
   const {toggleDayToHabit} = useLogicStore()
 
-  const {Modal: AppendModal, isOpen, setIsOpen} = ModalHOC(AppendForm)
+  const {Modal: AppendModal, setIsOpen} = ModalHOC(AppendForm)
 
   const handleCheckHabit = (habit: string, date: string) => () => {
     toggleDayToHabit(habit, date)
@@ -88,12 +88,12 @@ export const CalendarTable: React.FC = () => {
       <div>
         <button
           onClick={() => setIsOpen(true)}
-          className="mt-4 block w-full rounded-lg bg-blue-500 px-4 py-2 font-bold text-white
+          className="mt-4 block rounded-lg bg-blue-500 px-4 py-2 font-bold text-white
             hover:bg-blue-700">
           Append
         </button>
       </div>
-      <AppendModal title={'ok'} />
+      <AppendModal title={'Append Habit'} />
     </>
   )
 }
