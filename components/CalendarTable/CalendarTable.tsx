@@ -3,7 +3,7 @@ import React, {useEffect} from 'react'
 import {FaCheck} from 'react-icons/fa'
 import {generateDay} from '@/utils'
 import {useLogicStore} from '@/store'
-import {AppendForm, ModalHOC} from '@/components'
+import {AppendForm, ModalHOC, Btn} from '@/components'
 
 const getDayColor = (isToday: boolean) => {
   if (isToday) {
@@ -25,8 +25,10 @@ export const CalendarTable: React.FC = () => {
 
   useEffect(() => {
     loadHabits()
-    setIsOpen(true)
+    // setIsOpen(true)
   }, [loadHabits])
+
+  console.log('habitList', habitList)
 
   return (
     <>
@@ -84,15 +86,10 @@ export const CalendarTable: React.FC = () => {
           </table>
         </div>
       ) : (
-        'No habit...'
+        'Нет привычек...'
       )}
-      <div>
-        <button
-          onClick={() => setIsOpen(true)}
-          className="mt-4 block rounded-lg bg-blue-500 px-4 py-2 font-bold text-white
-            hover:bg-blue-700">
-          Append
-        </button>
+      <div className="mt-6">
+        <Btn onClick={() => setIsOpen(true)}>Добавить привычку</Btn>
       </div>
       <AppendModal title={'Создать привычку'} />
     </>

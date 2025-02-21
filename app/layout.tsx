@@ -13,7 +13,7 @@ export default function RootLayout({
       </head>
       <body>
         <Header />
-        <main className="py-4">{children}</main>
+        <main className="py-8">{children}</main>
       </body>
     </html>
   )
