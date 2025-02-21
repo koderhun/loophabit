@@ -25,6 +25,7 @@ export const CalendarTable: React.FC = () => {
 
   useEffect(() => {
     loadHabits()
+    setIsOpen(true)
   }, [loadHabits])
 
   return (
@@ -93,7 +94,7 @@ export const CalendarTable: React.FC = () => {
           Append
         </button>
       </div>
-      <AppendModal title={'Append Habit'} />
+      <AppendModal title={'Создать привычку'} />
     </>
   )
 }

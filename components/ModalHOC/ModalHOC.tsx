@@ -36,14 +36,13 @@ export const ModalHOC = (
           open={isOpen}
           onClose={() => setIsOpen(false)}
           className="relative z-50">
-          {/* The backdrop, rendered as a fixed sibling to the panel container */}
           <DialogBackdrop className="fixed inset-0 bg-black/30" />
 
-          {/* Full-screen container to center the panel */}
           <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-            {/* The actual dialog panel  */}
-            <DialogPanel className="max-w-lg min-w-xs space-y-4 bg-white p-4">
-              <DialogTitle className="font-bold">{title}</DialogTitle>
+            <DialogPanel className="w-lg space-y-4 bg-white p-4">
+              <DialogTitle className="mb-6 text-center text-2xl font-bold">
+                {title}
+              </DialogTitle>
               <Component closeModal={closeModal} />
             </DialogPanel>
           </div>
