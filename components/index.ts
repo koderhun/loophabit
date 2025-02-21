@@ -1,6 +1,5 @@
 export {Metadata} from './Metadata/Metadata'
 export {Header} from './Header/Header'
-export {Calendar} from './Calendar/Calendar'
 export {CalendarTable} from './CalendarTable/CalendarTable'
 export {AppendForm} from './AppendForm/AppendForm'
 export {ModalHOC} from './ModalHOC/ModalHOC'

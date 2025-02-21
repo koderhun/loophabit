@@ -8,7 +8,6 @@ interface BtnProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Btn: React.FC<BtnProps> = ({
-  onClick,
   iconLeft,
   iconRight,
   className,

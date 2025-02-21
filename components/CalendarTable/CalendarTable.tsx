@@ -12,23 +12,16 @@ const getDayColor = (isToday: boolean) => {
 }
 
 export const CalendarTable: React.FC = () => {
-  const {loadHabits, habitList} = useLogicStore()
+  const {habitList} = useLogicStore()
   const dates = generateDay()
 
   const {toggleDayToHabit} = useLogicStore()
 
-  const {Modal: AppendModal, setIsOpen} = ModalHOC(AppendForm)
+  const {Modal: AppendModal, handleOpen} = ModalHOC(AppendForm)
 
   const handleCheckHabit = (habit: string, date: string) => () => {
     toggleDayToHabit(habit, date)
   }
-
-  useEffect(() => {
-    loadHabits()
-    // setIsOpen(true)
-  }, [loadHabits])
-
-  console.log('habitList', habitList)
 
   return (
     <>
@@ -89,7 +82,7 @@ export const CalendarTable: React.FC = () => {
         'Нет привычек...'
       )}
       <div className="mt-6">
-        <Btn onClick={() => setIsOpen(true)}>Добавить привычку</Btn>
+        <Btn onClick={() => handleOpen()}>Добавить привычку</Btn>
       </div>
       <AppendModal title={'Создать привычку'} />
     </>

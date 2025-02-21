@@ -2,7 +2,6 @@
 import React from 'react'
 import Image from 'next/image'
 import {path} from '@/store'
-import {FaBars} from 'react-icons/fa6'
 
 export const Header: React.FC = () => {
   return (

@@ -15,7 +15,7 @@ interface dialogProps {
 type ModalHOCProps = {
   Modal: React.FC<dialogProps>
   isOpen: boolean
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  handleOpen: () => void
 }
 
 type componentProps = {
@@ -26,6 +26,8 @@ export const ModalHOC = (
   Component: React.FC<componentProps>,
 ): ModalHOCProps => {
   const [isOpen, setIsOpen] = useState(false)
+
+  const handleOpen = () => setIsOpen(true)
 
   const closeModal = () => setIsOpen(false)
 
@@ -50,6 +52,6 @@ export const ModalHOC = (
       )
     },
     isOpen,
-    setIsOpen,
+    handleOpen,
   }
 }
