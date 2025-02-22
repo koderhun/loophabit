@@ -1,7 +1,6 @@
 'use client'
 import React from 'react'
-
-export type selectedType = 'logic' | 'count'
+import {selectedType} from '@/store'
 
 interface BtnGroupProps {
   selected: selectedType

@@ -3,10 +3,13 @@
 import {create} from 'zustand'
 import {persist, createJSONStorage} from 'zustand/middleware'
 
+export type selectedType = 'logic' | 'count'
+
 export interface Day {
   day: string // Дата в формате ISO (YYYY-MM-DD)
-  isComplite: boolean | string
-  count: number | null // Если null то значит у нас boolean тип привычки
+  isComplite?: boolean | string
+  count?: number | null // Если null то значит у нас boolean тип привычки
+  typeHabit: selectedType
 }
 
 export interface HabitType {
@@ -47,7 +50,12 @@ export const useLogicStore = create<Store>()(
                   !habit.days[dayIndex].isComplite
               } else {
                 // Добавляем новый день
-                habit.days.push({day: targetDay, isComplite: true, count: null})
+                habit.days.push({
+                  day: targetDay,
+                  typeHabit: 'logic',
+                  isComplite: true,
+                  count: null,
+                })
               }
             }
             return habit

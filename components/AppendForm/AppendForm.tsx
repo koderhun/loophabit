@@ -1,9 +1,9 @@
 'use client'
 import React, {useState} from 'react'
 import {useForm} from 'react-hook-form'
-import {useLogicStore} from '@/store'
+import {useLogicStore, selectedType} from '@/store'
 import {Btn} from '@/components'
-import {BtnGroup, selectedType} from './components'
+import {BtnGroup} from './components'
 
 type FormValues = {
   habit: string
