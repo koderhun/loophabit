@@ -30,6 +30,7 @@ export const useLogicStore = create<Store>()(
   persist(
     (set, get) => ({
       habitList: [],
+
       appendHabit: (habit: HabitType) => {
         set(state => {
           const updatedHabitList = [...state.habitList, habit]
