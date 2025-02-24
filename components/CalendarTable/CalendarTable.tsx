@@ -33,7 +33,7 @@ export const CalendarTable: React.FC = () => {
                 <th
                   className="sticky left-0 border border-gray-300 bg-gray-300 px-4 py-2 dark:border-gray-600
                     dark:bg-gray-700">
-                  Habit
+                  Привычка
                 </th>
                 {dates.map((date, index) => (
                   <th
