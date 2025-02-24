@@ -40,12 +40,14 @@ export const ModalHOC = (
           className="relative z-50">
           <DialogBackdrop className="fixed inset-0 bg-black/30" />
 
-          <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-            <DialogPanel className="w-lg space-y-4 bg-white p-4">
-              <DialogTitle className="mb-6 text-center text-2xl font-bold">
+          <div className="fixed inset-0 flex w-screen items-center justify-center">
+            <DialogPanel className="w-lg space-y-4 bg-white">
+              <DialogTitle className="mb-0 border-b border-gray-300 p-4 text-center text-2xl">
                 {title}
               </DialogTitle>
-              <Component closeModal={closeModal} />
+              <div className="p-4">
+                <Component closeModal={closeModal} />
+              </div>
             </DialogPanel>
           </div>
         </Dialog>

@@ -34,8 +34,6 @@ export const AppendForm = ({closeModal}: Props) => {
     }
   }
 
-  console.log('okk', selectedId)
-
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
