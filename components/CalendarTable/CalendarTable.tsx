@@ -29,10 +29,10 @@ export const CalendarTable: React.FC = () => {
         <div className="overflow-x-auto">
           <table className="w-full table-auto border-collapse border border-gray-300 dark:border-gray-600">
             <thead>
-              <tr>
+              <tr className="bg-blue-50">
                 <th
-                  className="sticky left-0 border border-gray-300 bg-gray-300 px-4 py-2 dark:border-gray-600
-                    dark:bg-gray-700">
+                  className="sticky left-0 border border-gray-300 px-4 py-2 dark:border-gray-600
+                    dark:bg-blue-700">
                   Привычка
                 </th>
                 {dates.map((date, index) => (

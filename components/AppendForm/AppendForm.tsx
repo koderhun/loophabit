@@ -61,7 +61,11 @@ export const AppendForm = ({closeModal}: Props) => {
         onSelect={handleSelect}
       />
 
-      <Btn className="">Создать</Btn>
+      <Btn
+        type="submit"
+        className="">
+        Создать
+      </Btn>
     </form>
   )
 }

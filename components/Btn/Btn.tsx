@@ -13,11 +13,12 @@ export const Btn: React.FC<BtnProps> = ({
   iconRight,
   className,
   children,
+  type = 'button',
   ...rest
 }) => {
   return (
     <button
-      type="button"
+      type={type}
       className={`text-small flex cursor-pointer items-center justify-center bg-blue-500 px-4 py-2
         text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-400
         ${className}`}

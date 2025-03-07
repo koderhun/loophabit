@@ -13,7 +13,7 @@ export default function RootLayout({
       </head>
       <body>
         <Header />
-        <main className="py-4">{children}</main>
+        <main className="mx-auto max-w-screen-xl py-4">{children}</main>
       </body>
     </html>
   )
