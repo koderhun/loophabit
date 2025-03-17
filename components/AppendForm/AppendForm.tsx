@@ -27,6 +27,7 @@ export const AppendForm = ({closeModal}: Props) => {
     appendHabit({
       habit: data.habit,
       days: [],
+      typeHabit: selectedId,
     })
 
     if (closeModal) {

@@ -9,10 +9,10 @@ export interface Day {
   day: string // Дата в формате ISO (YYYY-MM-DD)
   isComplite?: boolean | string
   count?: number | null // Если null то значит у нас boolean тип привычки
-  typeHabit: selectedType
 }
 
 export interface HabitType {
+  typeHabit: selectedType
   habit: string
   days: Day[] // Массив дней, связанных с привычкой
 }
@@ -22,8 +22,13 @@ type Store = {
   appendHabit: (habit: HabitType) => void
   toggleDayToHabit: (habitName: string, targetDay: string) => void
   deleteHabit: (habitName: string) => void
-  editHabit: (oldHabitName: string, newHabitName: string) => void // Новая функция
+  editHabit: (oldHabitName: string, newHabitName: string) => void
   loadHabits: () => void
+  updateHabitDayCount: (
+    habitName: string,
+    targetDay: string,
+    count: number,
+  ) => void // New function
 }
 
 export const useLogicStore = create<Store>()(
@@ -46,16 +51,41 @@ export const useLogicStore = create<Store>()(
               )
 
               if (dayIndex !== -1) {
-                // Переключаем состояние дня
                 habit.days[dayIndex].isComplite =
                   !habit.days[dayIndex].isComplite
               } else {
-                // Добавляем новый день
                 habit.days.push({
                   day: targetDay,
-                  typeHabit: 'logic',
                   isComplite: true,
                   count: null,
+                })
+              }
+            }
+            return habit
+          })
+
+          return {habitList: updatedHabitList}
+        })
+      },
+      updateHabitDayCount: (
+        habitName: string,
+        targetDay: string,
+        count: number,
+      ) => {
+        set(state => {
+          const updatedHabitList = state.habitList.map(habit => {
+            if (habit.habit === habitName) {
+              const dayIndex = habit.days.findIndex(
+                day => day.day === targetDay,
+              )
+
+              if (dayIndex !== -1) {
+                habit.days[dayIndex].count = count
+              } else {
+                habit.days.push({
+                  day: targetDay,
+                  isComplite: false,
+                  count: count,
                 })
               }
             }
@@ -86,14 +116,13 @@ export const useLogicStore = create<Store>()(
         })
       },
       loadHabits: () => {
-        // Загрузка данных из localStorage происходит автоматически благодаря persist
         const loadedHabits = get().habitList
         set({habitList: loadedHabits})
       },
     }),
     {
-      name: 'habit-storage', // Уникальное имя для localStorage
-      storage: createJSONStorage(() => localStorage), // Используем localStorage
+      name: 'habit-storage',
+      storage: createJSONStorage(() => localStorage),
     },
   ),
 )
