@@ -8,7 +8,8 @@ export type selectedType = 'logic' | 'count'
 export interface Day {
   day: string // Дата в формате ISO (YYYY-MM-DD)
   isComplite?: boolean | string
-  count?: number | null // Если null то значит у нас boolean тип привычки
+  type: selectedType
+  count?: number // Если null то значит у нас boolean тип привычки
 }
 
 export interface HabitType {
@@ -57,7 +58,8 @@ export const useLogicStore = create<Store>()(
                 habit.days.push({
                   day: targetDay,
                   isComplite: true,
-                  count: null,
+                  count: 0,
+                  type: 'logic',
                 })
               }
             }
@@ -86,6 +88,7 @@ export const useLogicStore = create<Store>()(
                   day: targetDay,
                   isComplite: false,
                   count: count,
+                  type: 'count',
                 })
               }
             }

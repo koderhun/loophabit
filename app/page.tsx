@@ -1,3 +1,4 @@
+'use client'
 import {CalendarTable} from '@/components'
 
 export default function Home() {

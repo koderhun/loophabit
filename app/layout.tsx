@@ -1,3 +1,4 @@
+'use client'
 import {Metadata, Header} from '@/components'
 import './globals.css'
 

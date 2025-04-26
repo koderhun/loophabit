@@ -12,7 +12,7 @@ export const Header: React.FC = () => {
           className="flex items-center space-x-3 rtl:space-x-reverse">
           <Image
             width={24}
-            height={24}
+            height={36}
             src={`${path.images}logo.svg`}
             className="mr-3 h-6 sm:h-9"
             alt="Logo"
