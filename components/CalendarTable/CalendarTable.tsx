@@ -1,41 +1,9 @@
 'use client'
 import React, {useEffect} from 'react'
-import {FaCheck} from 'react-icons/fa'
 import {generateDay, getDayColor} from '@/utils'
 import {useLogicStore} from '@/store'
 import {AppendForm, ModalHOC, Btn} from '@/components'
-
-type ItemLogicProps = {
-  index: number
-  date: {
-    date: string
-    isToday: boolean
-  }
-  habit: {
-    habit: string
-    days: {day: string; isComplite: boolean}[]
-  }
-  handleCheckHabit: (habit: string, date: string) => () => void
-}
-
-const ItemLogic: React.FC<ItemLogicProps> = ({
-  index,
-  date,
-  habit,
-  handleCheckHabit,
-}) => {
-  return (
-    <td
-      key={`${String(index)}_${String(date.date)}`}
-      onClick={handleCheckHabit(habit.habit, date.date)}
-      className={`cursor-pointer border border-gray-300 px-4 py-2 text-center dark:border-gray-600
-        ${getDayColor(date.isToday)}`}>
-      {habit.days.some(day => day.day === date.date && day.isComplite) && (
-        <FaCheck className="inline-block text-green-500" />
-      )}
-    </td>
-  )
-}
+import {ItemLogic, ItemCount} from './componets'
 
 export const CalendarTable: React.FC = () => {
   const {habitList} = useLogicStore()
@@ -75,32 +43,39 @@ export const CalendarTable: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {habitList.map((habit, key1) => (
-                <tr key={key1}>
-                  <td
-                    className="sticky left-0 w-1/3 border border-gray-300 bg-gray-100 px-4 py-2
-                      dark:border-gray-600 dark:bg-gray-700">
-                    <div className="flex gap-4 align-middle">
-                      <div
-                        className="line-clamp-3"
-                        title={habit.habit}>
-                        {habit.habit}
+              {habitList.map((habit, key1) => {
+                console.log('ff', habit)
+                return (
+                  <tr key={key1}>
+                    <td
+                      className="sticky left-0 w-1/3 border border-gray-300 bg-gray-100 px-4 py-2
+                        dark:border-gray-600 dark:bg-gray-700">
+                      <div className="flex gap-4 align-middle">
+                        <div
+                          className="line-clamp-3"
+                          title={habit.habit}>
+                          {habit.habit}
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                  {dates.map((date, index) => {
-                    return (
-                      <ItemLogic
-                        key={index}
-                        index={index}
-                        date={date}
-                        habit={habit}
-                        handleCheckHabit={handleCheckHabit}
-                      />
-                    )
-                  })}
-                </tr>
-              ))}
+                    </td>
+                    {dates.map((date, index) => {
+                      if (habit.typeHabit === 'count') {
+                        return <ItemCount {...date} />
+                      }
+                      return (
+                        <ItemLogic
+                          {...{
+                            index,
+                            date,
+                            habit,
+                            handleCheckHabit,
+                          }}
+                        />
+                      )
+                    })}
+                  </tr>
+                )
+              })}
             </tbody>
           </table>
         </div>
